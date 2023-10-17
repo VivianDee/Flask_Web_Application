@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 from flask import Blueprint, render_template
+from . import models
 
 views = Blueprint('views', __name__)
 
@@ -11,6 +12,7 @@ def home():
 @views.route('/result')
 def result():
     """Result page"""
+    all_results = 
     return render_template("result.html")
 
 @views.route('/sum')
