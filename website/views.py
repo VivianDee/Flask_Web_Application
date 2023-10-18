@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 from flask import Blueprint, render_template
-from . import models
+from .models import Announced_pu_results
+from . import db
+
+
+
 
 views = Blueprint('views', __name__)
 
@@ -12,8 +16,13 @@ def home():
 @views.route('/result')
 def result():
     """Result page"""
-    all_results = models.Announced_pu_results.query.all()
-    return render_template("result.html", result=all_results)
+    try:
+        all_results = db.session.query(Announced_pu_results).all()
+        print(all_results)
+        return render_template("result.html")
+    except Exception as e:
+        print(f"Error: {e}")
+        return "<p>An error occurred while fetching data.<p>"
 
 @views.route('/sum')
 def sum():

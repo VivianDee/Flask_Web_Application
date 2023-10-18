@@ -1,10 +1,11 @@
 #!/usr/bin/python3
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 import sys
 
 db = SQLAlchemy()
-DB_NAME = "database.db"
 
 def create_app():
     """Initialize Flask"""
@@ -16,7 +17,9 @@ def create_app():
         print('Usage: ./main.py password')
         exit(1)
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql://root:{sys.argv[1]}@localhost/bincomphptest'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqldb://root:{sys.argv[1]}@localhost:3306/bincomphptest'
+
+
     db.init_app(app)
 
     from .views import views
