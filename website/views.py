@@ -12,8 +12,8 @@ def home():
 @views.route('/result')
 def result():
     """Result page"""
-    all_results = 
-    return render_template("result.html")
+    all_results = models.Announced_pu_results.query.all()
+    return render_template("result.html", result=all_results)
 
 @views.route('/sum')
 def sum():
